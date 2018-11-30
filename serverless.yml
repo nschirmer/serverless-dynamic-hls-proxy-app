@@ -18,8 +18,6 @@ functions:
       - http:
           path: /playlist_preview.m3u8
           method: GET
-          cors: true
       - http:
           path: /chunklist.m3u8
           method: GET
-          cors: true
