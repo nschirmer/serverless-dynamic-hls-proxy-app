@@ -1,0 +1,25 @@
+service: serverless-dynamic-hls-proxy-app
+
+custom:
+  secrets: ${file(secrets.json)}
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: production
+  region: us-west-1
+  environment:
+    NODE_ENV: ${self:custom.secrets.NODE_ENV}
+
+functions:
+  app:
+    handler: app/dynamic-handler.server
+    events:
+      - http:
+          path: /playlist_preview.m3u8
+          method: GET
+          cors: true
+      - http:
+          path: /chunklist.m3u8
+          method: GET
+          cors: true
