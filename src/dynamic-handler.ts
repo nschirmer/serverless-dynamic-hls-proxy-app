@@ -5,6 +5,12 @@ const express = require('express');
 const sls = require('serverless-http');
 const app = express();
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.get('/playlist_preview.m3u8', async (req, res, next) => {
     const playlistUrl = req.query.uri;
     const playlistUrlParts = playlistUrl.split('/');
